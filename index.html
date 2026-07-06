@@ -68,13 +68,14 @@
   .process-track {
     background: white;
     border-bottom: 1px solid var(--border);
-    padding: 0 24px;
+    padding: 0 12px;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   .process-steps {
     display: flex;
     align-items: stretch;
-    min-width: 600px;
+    min-width: 560px;
     max-width: 900px;
     margin: 0 auto;
   }
@@ -83,7 +84,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 14px 8px 12px;
+    padding: 10px 4px 8px;
     position: relative;
     cursor: default;
     border-bottom: 3px solid transparent;
@@ -109,9 +110,10 @@
   #track-6.active { border-bottom-color: #c8942a; }
   #track-6.active .step-num { background: #c8942a; }
   #track-6.active .step-label { color: #c8942a; }
-  #track-7.active { border-bottom-color: #203954; }
-  #track-7.active .step-num { background: #203954; }
-  #track-7.active .step-label { color: #203954; }
+  #track-5.active { border-bottom-color: #203954; }
+  #track-5.active .step-num { background: #203954; }
+  #track-5.active .step-label { color: #203954; }
+
   .process-step + .process-step::before {
     content: '';
     position: absolute;
@@ -140,13 +142,13 @@
   .process-step.active .step-num { background: var(--teal); }
   .process-step.done .step-num { background: var(--green); }
   .step-label {
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.02em;
     color: var(--step-inactive);
     text-align: center;
-    line-height: 1.3;
+    line-height: 1.2;
   }
   .process-step.active .step-label { color: var(--teal); }
   .process-step.done .step-label { color: var(--green); }
@@ -476,8 +478,8 @@
   </div>
   <div style="margin-left:auto;flex-shrink:0">
     <a href="resources.html" onclick="showResources(event)"
-      style="display:inline-flex;align-items:center;gap:6px;padding:8px 14px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.4);border-radius:8px;color:white;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer"
-      onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+      style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;background:white;border:none;border-radius:8px;color:var(--green);font-size:13px;font-weight:700;text-decoration:none;cursor:pointer;box-shadow:0 1px 4px rgba(0,0,0,0.15)"
+      onmouseover="this.style.background='#f0faf8'" onmouseout="this.style.background='white'">
       &#128218; Resources
     </a>
   </div>
@@ -492,26 +494,22 @@
     </div>
     <div class="process-step" id="track-2">
       <div class="step-num">2</div>
-      <div class="step-label">Assessment Type</div>
+      <div class="step-label">What You Taught</div>
     </div>
     <div class="process-step" id="track-3">
       <div class="step-num">3</div>
-      <div class="step-label">What You Taught</div>
+      <div class="step-label">Find Your Assessment</div>
     </div>
     <div class="process-step" id="track-4">
       <div class="step-num">4</div>
-      <div class="step-label">Find Your Assessment</div>
+      <div class="step-label">Assign in CAASPP</div>
     </div>
     <div class="process-step" id="track-5">
       <div class="step-num">5</div>
-      <div class="step-label">Assign in CAASPP</div>
+      <div class="step-label">Get Results</div>
     </div>
     <div class="process-step" id="track-6">
       <div class="step-num">6</div>
-      <div class="step-label">Get Results</div>
-    </div>
-    <div class="process-step" id="track-7">
-      <div class="step-num">7</div>
       <div class="step-label">Use Results</div>
     </div>
   </div>
@@ -522,10 +520,19 @@
 
   <!-- STEP 1: Grade & Subject -->
   <div class="step-panel active" id="panel-1">
+    <div style="background:#e8f6f4;border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px">
+      <div style="font-size:13px;color:var(--navy);line-height:1.5">
+        <strong>New here?</strong> This tool walks you through finding, assigning, and using Smarter Balanced Interim Assessments step by step.
+      </div>
+      <button onclick="showResources(event)" style="flex-shrink:0;padding:7px 12px;background:var(--teal);color:white;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">
+        &#128218; Resources
+      </button>
+    </div>
+
     <div class="card">
-      <div class="card-title"><div class="icon">1</div> Select your grade level</div>
-      <div class="card-sub">Choose the grade you teach.</div>
-      <div class="grid-3" id="grade-grid">
+      <div class="card-title"><div class="icon">1</div> Select your grade and subject</div>
+      <div class="card-sub">Choose the grade you teach, then select your subject.</div>
+      <div class="grid-3" id="grade-grid" style="margin-bottom:0">
         <button class="sel-btn" onclick="selectGrade('3')">Grade 3</button>
         <button class="sel-btn" onclick="selectGrade('4')">Grade 4</button>
         <button class="sel-btn" onclick="selectGrade('5')">Grade 5</button>
@@ -534,24 +541,22 @@
         <button class="sel-btn" onclick="selectGrade('8')">Grade 8</button>
         <button class="sel-btn" onclick="selectGrade('HS')" style="grid-column:1/-1">High School (Grades 9-11)</button>
       </div>
-    </div>
-
-    <div class="card" id="subject-card" style="display:none">
-      <div class="card-title"><div class="icon">1</div> Select your subject</div>
-      <div class="card-sub">Choose the content area.</div>
-      <div class="grid-3">
-        <button class="subject-btn" onclick="selectSubject('ELA')">
-          <span class="subj-icon">📖</span>
-          ELA / Literacy / Listening
-        </button>
-        <button class="subject-btn" onclick="selectSubject('MATH')">
-          <span class="subj-icon">🔢</span>
-          Mathematics
-        </button>
-        <button class="subject-btn" onclick="selectSubject('SCIENCE')">
-          <span class="subj-icon">🔬</span>
-          Science (CAST)
-        </button>
+      <div id="subject-card" style="display:none;margin-top:20px;padding-top:18px;border-top:1px solid var(--border)">
+        <div style="font-size:13px;font-weight:600;color:var(--text-muted);margin-bottom:10px">Now select your subject</div>
+        <div class="grid-3">
+          <button class="subject-btn" onclick="selectSubject('ELA')">
+            <span class="subj-icon">📖</span>
+            ELA / Literacy / Listening
+          </button>
+          <button class="subject-btn" onclick="selectSubject('MATH')">
+            <span class="subj-icon">🔢</span>
+            Mathematics
+          </button>
+          <button class="subject-btn" onclick="selectSubject('SCIENCE')">
+            <span class="subj-icon">🔬</span>
+            Science (CAST)
+          </button>
+        </div>
       </div>
     </div>
 
@@ -562,104 +567,8 @@
     </div>
   </div>
 
-  <!-- STEP 2: Assessment Type -->
-  <div class="step-panel" id="panel-2">
-    <div class="card">
-      <div class="card-title" style="color:#2a9d8f"><div class="icon" style="background:#2a9d8f">2</div> What kind of assessment do you need?</div>
-      <div class="card-sub">Choose based on what you want to find out about your students.</div>
-
-      <div style="display:flex;flex-direction:column;gap:12px;margin-top:4px">
-
-        <!-- FIAB option -->
-        <button id="type-fiab" onclick="selectAssessmentType('FIAB')"
-          style="width:100%;text-align:left;background:white;border:2px solid var(--border);border-radius:12px;padding:0;overflow:hidden;cursor:pointer;transition:border-color 0.15s">
-          <div style="background:#2a9d8f;padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
-            <div style="display:flex;align-items:center;gap:10px">
-              <span style="font-size:20px">&#9989;</span>
-              <span style="font-size:14px;font-weight:700;color:white">FIAB &mdash; Focused Interim Assessment Block</span>
-            </div>
-            <span id="fiab-check" style="color:white;font-size:16px;display:none">&#10003;</span>
-          </div>
-          <div style="padding:12px 16px">
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:6px">
-              <span style="font-size:11px;font-weight:700;background:#e8f6f4;color:#2a9d8f;padding:3px 8px;border-radius:12px">Targeted</span>
-              <span style="font-size:11px;font-weight:700;background:#e8f6f4;color:#2a9d8f;padding:3px 8px;border-radius:12px">1&ndash;3 standards</span>
-              <span style="font-size:11px;font-weight:700;background:#e8f6f4;color:#2a9d8f;padding:3px 8px;border-radius:12px">15&ndash;30 minutes</span>
-            </div>
-            <div style="font-size:12px;color:var(--text-muted);line-height:1.5">Best for checking a specific skill after a lesson or unit.</div>
-          </div>
-        </button>
-
-        <!-- IAB option -->
-        <button id="type-iab" onclick="selectAssessmentType('IAB')"
-          style="width:100%;text-align:left;background:white;border:2px solid var(--border);border-radius:12px;padding:0;overflow:hidden;cursor:pointer;transition:border-color 0.15s">
-          <div style="background:#297248;padding:12px 16px;display:flex;align-items:center;justify-content:space-between">
-            <div style="display:flex;align-items:center;gap:10px">
-              <span style="font-size:20px">&#128202;</span>
-              <span style="font-size:14px;font-weight:700;color:white">Interim Assessment Block (IAB)</span>
-            </div>
-            <span id="iab-check" style="color:white;font-size:16px;display:none">&#10003;</span>
-          </div>
-          <div style="padding:12px 16px">
-            <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px">
-              <span style="font-size:11px;font-weight:700;background:#e8f4ee;color:#297248;padding:3px 8px;border-radius:12px">Targeted bundle of standards</span>
-              <span style="font-size:11px;font-weight:700;background:#e8f4ee;color:#297248;padding:3px 8px;border-radius:12px">Short &amp; standalone</span>
-              <span style="font-size:11px;font-weight:700;background:#e8f4ee;color:#297248;padding:3px 8px;border-radius:12px">30&ndash;60 minutes</span>
-            </div>
-            <div style="font-size:12px;color:var(--navy);line-height:1.6;margin-bottom:4px">Focuses on a specific bundle of targets within ELA or Math rather than the entire year&rsquo;s curriculum. Educators often call these <em>modular assessments</em> &mdash; short, standalone modules tailored to specific instruction.</div>
-            <div style="font-size:12px;color:var(--text-muted);line-height:1.5">Best for checking mastery of a specific skill area before or after a unit.</div>
-          </div>
-        </button>
-
-        <!-- ICA info only (not selectable) -->
-        <div style="border:2px solid #d0d8e0;border-radius:12px;overflow:hidden;opacity:0.75">
-          <div style="background:#6b8fa8;padding:12px 16px;display:flex;align-items:center;gap:10px">
-            <span style="font-size:20px">&#127891;</span>
-            <div>
-              <div style="font-size:14px;font-weight:700;color:white">Comprehensive Assessment (ICA)</div>
-              <div style="font-size:11px;color:rgba(255,255,255,0.8);margin-top:1px">For reference only &mdash; use minimally</div>
-            </div>
-          </div>
-          <div style="padding:12px 16px;background:#f5f7f9">
-            <div style="font-size:12px;color:#5a6a78;line-height:1.6;margin-bottom:10px">
-              The ICA covers the full range of grade-level standards and is most predictive of summative performance. Because of its length and scope, it should be used sparingly and intentionally &mdash; not as a routine check-in.
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-              <div>
-                <div style="font-size:10px;font-weight:700;color:#6b8fa8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px">Characteristics</div>
-                <ul style="margin:0;padding-left:14px;font-size:11px;color:#5a6a78;line-height:1.7;list-style:disc">
-                  <li>Full range of grade-level standards</li>
-                  <li>Longer administration time</li>
-                  <li>Includes Performance Tasks</li>
-                  <li>Produces an overall scale score</li>
-                  <li>Most predictive of summative performance</li>
-                </ul>
-              </div>
-              <div>
-                <div style="font-size:10px;font-weight:700;color:#6b8fa8;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px">Best Use</div>
-                <ul style="margin:0;padding-left:14px;font-size:11px;color:#5a6a78;line-height:1.7;list-style:disc">
-                  <li>Benchmark assessments</li>
-                  <li>Fall, winter, or spring screening</li>
-                  <li>Preparing students for the summative</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <button class="btn btn-secondary btn-sm" onclick="goToStep(1)">&larr; Back</button>
-      <button class="btn btn-primary" id="step2-type-next" disabled onclick="goToStep(3)">
-        Continue &rarr;
-      </button>
-    </div>
-  </div>
-
   <!-- STEP 3: What You Taught -->
-  <div class="step-panel" id="panel-3">
+  <div class="step-panel" id="panel-2">
     <div class="breadcrumb">
       <span class="bc-item" id="bc-grade"></span>
       <span class="bc-sep">&#8250;</span>
@@ -688,6 +597,9 @@
         <textarea class="topic-input" id="topic-input" rows="4"
           placeholder="e.g. We finished our unit on multiplying and dividing fractions. Students practiced applying previous knowledge to new situations."
           oninput="checkTopicInput()"></textarea>
+        <div id="topic-hint" style="display:none;font-size:12px;color:var(--coral);margin-top:6px">
+          &#9432; Add a bit more detail — describe the skill or standard you just taught (minimum 10 characters).
+        </div>
       </div>
 
       <!-- Standard / claim input -->
@@ -741,7 +653,7 @@
     </div>
 
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <button class="btn btn-secondary btn-sm" onclick="goToStep(2)">&larr; Back</button>
+      <button class="btn btn-secondary btn-sm" onclick="goToStep(1)">&larr; Back</button>
       <button class="btn btn-primary" id="step2-next" disabled onclick="findAssessment()">
         Find My Assessment &rarr;
       </button>
@@ -749,7 +661,7 @@
   </div>
 
   <!-- STEP 3: Results -->
-  <div class="step-panel" id="panel-4">
+  <div class="step-panel" id="panel-3">
     <div class="breadcrumb">
       <span class="bc-item" id="bc-grade-3"></span>
       <span class="bc-sep">&#8250;</span>
@@ -759,22 +671,26 @@
     </div>
 
     <div style="background:#e8f6f4;border-left:4px solid var(--teal);border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:16px;font-size:13px;color:var(--navy);line-height:1.5">
-      Select the assessment you want to assign. Pick an <strong>IAB</strong> for a broader check, or a <strong>FIAB</strong> for targeted data on a specific skill. You can assign both at different times.
+      Your results are shown below. <strong>IABs</strong> cover a broader skill area. <strong>FIABs</strong> target 1&ndash;3 specific standards. You can assign one now and return to assign another later.
     </div>
 
     <div id="results-container"></div>
 
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
-      <button class="btn btn-secondary btn-sm" onclick="goToStep(3)">&larr; Back</button>
-      <button class="btn btn-primary" id="step3-next" onclick="goToStep(5)">
+      <button class="btn btn-secondary btn-sm" onclick="goToStep(2)">&larr; Back</button>
+      <button class="btn btn-primary" id="step3-next" onclick="goToStep(4)">
         Assign selected assessment &rarr;
       </button>
     </div>
   </div>
 
   <!-- STEP 4: Assign in CAASPP -->
-  <div class="step-panel" id="panel-5">
+  <div class="step-panel" id="panel-4">
     <div class="breadcrumb">
+      <span class="bc-item" id="bc-grade-4"></span>
+      <span class="bc-sep">&#8250;</span>
+      <span class="bc-item" id="bc-subject-4"></span>
+      <span class="bc-sep">&#8250;</span>
       <span class="bc-item" id="bc-selected-name"></span>
     </div>
 
@@ -823,20 +739,24 @@
     </div>
 
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
-      <button class="btn btn-secondary btn-sm" onclick="goToStep(4)">&larr; Back</button>
-      <button class="btn btn-primary" onclick="goToStep(6)">
+      <button class="btn btn-secondary btn-sm" onclick="goToStep(3)">&larr; Back</button>
+      <button class="btn btn-primary" onclick="goToStep(5)">
         Get Results &rarr;
       </button>
     </div>
   </div>
 
   <!-- STEP 5: Get Results -->
-  <div class="step-panel" id="panel-6">
+  <div class="step-panel" id="panel-5">
     <div class="success-header" style="background:#203954">
       <h2 id="final-name-header"></h2>
       <p>Your assessment is assigned. Here is how to get your results from CERS.</p>
     </div>
     <div class="success-body">
+
+      <p style="font-size:14px;color:var(--navy);line-height:1.6;margin-bottom:18px">
+        Your results will be in <strong>CERS</strong>. Click a section below to get started.
+      </p>
 
       <!-- SECTION 1 -->
       <div style="border:1px solid var(--border);border-radius:10px;overflow:hidden;margin-bottom:14px">
@@ -898,15 +818,15 @@
       </div>
 
       <div style="padding-top:8px;display:flex;justify-content:space-between;align-items:center">
-        <button class="btn btn-secondary btn-sm" onclick="goToStep(5)">&larr; Back</button>
-        <button class="btn btn-primary" onclick="goToStep(7)">Use Results to Reteach &rarr;</button>
+        <button class="btn btn-secondary btn-sm" onclick="goToStep(4)">&larr; Back</button>
+        <button class="btn btn-primary" onclick="goToStep(6)">Use Results to Reteach &rarr;</button>
       </div>
 
     </div>
   </div>
 
   <!-- STEP 6: Use Results to Reteach -->
-  <div class="step-panel" id="panel-7">
+  <div class="step-panel" id="panel-6">
     <div class="success-header" style="background:#c8942a">
       <h2>Use Results to Reteach</h2>
       <p>Choose your path — use curated resources or analyze your data with AI.</p>
@@ -919,12 +839,12 @@
       </div>
 
       <!-- OPTION A: Tools for Teachers -->
-      <div style="border:1.5px solid var(--teal);border-radius:12px;overflow:hidden;margin-bottom:16px">
+      <div style="border:2.5px solid var(--teal);border-radius:12px;overflow:hidden;margin-bottom:16px">
         <button onclick="toggleSection('optA')" style="width:100%;background:var(--teal);border:none;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left">
           <div style="display:flex;align-items:center;gap:10px">
             <span style="font-size:18px">&#127775;</span>
             <div>
-              <div style="font-size:14px;font-weight:700;color:white">Option A &mdash; Tools for Teachers</div>
+              <div style="display:flex;align-items:center;gap:8px"><div style="font-size:14px;font-weight:700;color:white">Option A &mdash; Tools for Teachers</div><span style="font-size:10px;font-weight:700;background:white;color:var(--teal);padding:2px 7px;border-radius:10px">START HERE</span></div>
               <div style="font-size:11px;color:rgba(255,255,255,0.75)">Click to expand</div>
             </div>
           </div>
@@ -974,8 +894,8 @@
       </div>
 
       <!-- OPTION B: Analyze with AI -->
-      <div style="border:1.5px solid var(--navy);border-radius:12px;overflow:hidden;margin-bottom:20px">
-        <button onclick="toggleSection('optB')" style="width:100%;background:var(--navy);border:none;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left">
+      <div style="border:1.5px solid #8fa0b0;border-radius:12px;overflow:hidden;margin-bottom:20px">
+        <button onclick="toggleSection('optB')" style="width:100%;background:#4a6580;border:none;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left">
           <div style="display:flex;align-items:center;gap:10px">
             <span style="font-size:18px">&#129302;</span>
             <div>
@@ -1075,7 +995,7 @@ Acknowledge that you understand. Start by introducing yourself briefly as my ins
       </div>
 
       <div style="border-top:1px solid var(--border);padding-top:16px;display:flex;justify-content:space-between;align-items:center">
-        <button class="btn btn-secondary btn-sm" onclick="goToStep(6)">&larr; Back</button>
+        <button class="btn btn-secondary btn-sm" onclick="goToStep(5)">&larr; Back</button>
         <button class="btn btn-secondary" onclick="resetApp()">
           &#8635; Find Another Assessment
         </button>
@@ -1557,27 +1477,9 @@ const SCIENCE_GRADE_MAP = {
   '3':'5','4':'5','5':'5','6':'8','7':'8','8':'8','HS':'HS'
 };
 
-let state = { grade: null, subject: null, topic: '', selectedAssessment: null, searchMode: 'plain', assessmentType: null };
+let state = { grade: null, subject: null, topic: '', selectedAssessment: null, searchMode: 'plain' };
 
-function selectAssessmentType(type) {
-  state.assessmentType = type;
-  const btns   = { FIAB: 'type-fiab', IAB: 'type-iab' };
-  const checks = { FIAB: 'fiab-check', IAB: 'iab-check' };
-  const colors = { FIAB: '#2a9d8f', IAB: '#297248' };
-  Object.keys(btns).forEach(t => {
-    const btn = document.getElementById(btns[t]);
-    const chk = document.getElementById(checks[t]);
-    if (!btn) return;
-    if (t === type) {
-      btn.style.borderColor = colors[t];
-      if (chk) chk.style.display = 'inline';
-    } else {
-      btn.style.borderColor = 'var(--border)';
-      if (chk) chk.style.display = 'none';
-    }
-  });
-  document.getElementById('step2-type-next').disabled = false;
-}
+
 
 function toggleClaim() {
   const body = document.getElementById('claim-body');
@@ -1759,10 +1661,7 @@ function checkStandardInput() {
 
 function scoreByStandard(pool, query) {
   const q = query.toLowerCase().replace(/[.\s-]/g, '');
-  const aType = state.assessmentType;
-  const iabPool = aType === 'FIAB' ? [] : (pool.iab || []);
-  const fiabPool = aType === 'IAB' ? [] : (pool.fiab || []);
-  const allAssessments = [...iabPool, ...fiabPool];
+  const allAssessments = [...(pool.iab || []), ...(pool.fiab || [])];
 
   const scored = allAssessments.map(a => {
     let score = 0;
@@ -1826,6 +1725,9 @@ function checkTopicInput() {
   if (state.searchMode === 'standard') return;
   const v = document.getElementById('topic-input').value.trim();
   state.topic = v;
+  const tooShort = v.length > 0 && v.length < 10;
+  const hint = document.getElementById('topic-hint');
+  if (hint) hint.style.display = tooShort ? 'block' : 'none';
   document.getElementById('step2-next').disabled = v.length < 10;
 }
 
@@ -1845,6 +1747,9 @@ function goToStep(n) {
   }
   if (n === 4 && state.selectedAssessment) {
     const sa = state.selectedAssessment;
+    const gradeLabel4 = state.grade === 'HS' ? 'High School' : 'Grade '+state.grade;
+    const el4g = document.getElementById('bc-grade-4'); if(el4g) el4g.textContent = gradeLabel4;
+    const el4s = document.getElementById('bc-subject-4'); if(el4s) el4s.textContent = state.subject === 'ELA' ? 'ELA/Literacy' : state.subject === 'MATH' ? 'Mathematics' : 'Science';
     document.getElementById('assign-name').textContent = sa.name;
     const type = sa.type;
     const typeFull = type === 'IAB' ? 'Interim Assessment Blocks (IAB)' : type === 'FIAB' ? 'Focused Interim Assessment Blocks (FIAB)' : 'Interim Comprehensive Assessments (ICA)';
@@ -1891,7 +1796,7 @@ function findAssessment() {
     renderResults(grouped);
     document.getElementById('thinking-box').style.display = 'none';
     document.getElementById('step2-next').disabled = false;
-    goToStep(4);
+    goToStep(3);
   }, 1400);
 }
 
@@ -1929,10 +1834,8 @@ function scoreAssessments() {
 
   const topic = state.topic.toLowerCase();
 
-  const aType = state.assessmentType; // 'IAB', 'FIAB', or null
-
-  const scoredIABs = (aType === 'FIAB') ? [] : scoreList(pool.iab || [], topic);
-  const scoredFIABs = aType === 'IAB' ? [] : scoreList(pool.fiab || [], topic);
+  const scoredIABs = scoreList(pool.iab || [], topic);
+  const scoredFIABs = scoreList(pool.fiab || [], topic);
 
   const maxFIAB = scoredFIABs.length > 0 ? scoredFIABs[0].score : 0;
   const fiabThreshold = maxFIAB > 3 ? maxFIAB * 0.25 : 0.4;
@@ -1940,13 +1843,8 @@ function scoreAssessments() {
   const topIABs = scoredIABs.filter(a => a.score > 0.4).slice(0, 2);
   const topFIABs = scoredFIABs.filter(a => a.score >= fiabThreshold).slice(0, 5);
 
-  // Fallback if nothing matched
   if (topIABs.length === 0 && topFIABs.length === 0) {
-    return {
-      iabs: aType === 'FIAB' ? [] : scoredIABs.slice(0, 1),
-      fiabs: aType === 'IAB' ? [] : scoredFIABs.slice(0, 3),
-      noMatch: false
-    };
+    return { iabs: scoredIABs.slice(0, 1), fiabs: scoredFIABs.slice(0, 3), noMatch: false };
   }
 
   return { iabs: topIABs, fiabs: topFIABs, noMatch: false };
@@ -1984,7 +1882,6 @@ function renderResults(grouped) {
           <div class="alt-result-name">${r.name}</div>
           <div class="alt-result-sub">${r.standard}</div>
           ${r.ccss ? `<div style="font-size:12px;color:var(--navy);margin-top:4px;line-height:1.5"><span style="font-weight:600;color:var(--green)">Standards:</span> ${r.ccss}</div>` : ''}
-          <div style="font-size:11px;color:var(--teal);margin-top:3px;font-family:monospace">In CAASPP: ${caasppPath(r.type)}</div>
         </div>
         <span class="result-badge badge-iab">${r.type}</span>
       </div>`;
@@ -2003,7 +1900,6 @@ function renderResults(grouped) {
           <div class="alt-result-name">${r.name}</div>
           <div class="alt-result-sub">${r.standard}</div>
           ${r.ccss ? `<div style="font-size:12px;color:var(--navy);margin-top:4px;line-height:1.5"><span style="font-weight:600;color:var(--green)">Standards:</span> ${r.ccss}</div>` : ''}
-          <div style="font-size:11px;color:var(--teal);margin-top:3px;font-family:monospace">In CAASPP: ${caasppPath(r.type)}</div>
         </div>
         <span class="result-badge badge-fiab">${r.type}</span>
       </div>`;
@@ -2042,15 +1938,7 @@ function resetApp() {
   document.getElementById('step1-next').disabled = true;
   document.getElementById('step2-next').disabled = true;
   state.searchMode = 'plain';
-  state.assessmentType = null;
   setSearchMode('plain');
-  // Reset type buttons
-  const fb = document.getElementById('type-fiab'); if(fb) fb.style.borderColor='var(--border)';
-  const ib = document.getElementById('type-iab'); if(ib) ib.style.borderColor='var(--border)';
-  const fc = document.getElementById('fiab-check'); if(fc) fc.style.display='none';
-  const ic = document.getElementById('iab-check'); if(ic) ic.style.display='none';
-
-  const stn = document.getElementById('step2-type-next'); if(stn) stn.disabled=true;
   goToStep(1);
   document.querySelector('#track-1').classList.add('active');
 }
